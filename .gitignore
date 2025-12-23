@@ -1,0 +1,18 @@
+# --- Betriebssystem-Dateien ---
+# Verhindert, dass versteckte Systemdateien von macOS oder Windows hochgeladen werden
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editor / IDE ---
+# Verhindert, dass deine persönlichen VS Code Einstellungen hochgeladen werden
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Logs ---
+# Falls Fehlerprotokolle erstellt werden
+*.log
+npm-debug.log*
+

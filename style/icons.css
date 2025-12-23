@@ -1,0 +1,83 @@
+.bestell-app-logo{
+  width: 150px;
+}
+.hamberger-menu{
+  font-size: xx-large;
+}
+icon-plus {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background-color: var(--orang);
+  color: rgb(254, 11, 11);
+  border: none;
+  border-radius: 0 15px 0 15px;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  &::hover {
+        background-color: #e67300;
+    }
+}
+
+
+.basket-plus,.basket-minus{
+  background-color: var(--orang);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 4px;
+}
+
+
+.basket-minus,.basket-trash {
+  &:hover{
+    background-color: red;
+  }
+}
+.basket-plus{
+  &:hover{
+    background-color: green;
+  }
+}
+.basket-trash {
+  background: transparent;
+  font-size: 24px;
+  color: red;
+  cursor: pointer;
+}
+
+.hero-plus-div{
+     background-color: rgb(199, 131, 4) !important;
+}
+.hero-plus-icon {
+    font-size: 50px;         /* gewünschte plus Größe */
+    color: white;          /* Farbe von plus*/
+    font-weight: bold;       /* optional */
+        
+    cursor: pointer;         /* klickbar */
+    border: none;
+    background-color: rgb(199, 131, 4) !important;
+    &:hover{
+      color: #049c18;
+    }
+
+ /*oval-form kommt von browser weil ich selber höhe und bereite nicht eingestellt*/
+
+}
+
+.arrow-icon{
+  color: #e67300;
+  font-size: 32px;
+}
+
