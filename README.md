@@ -21,4 +21,4 @@ Eine interaktive Web-App zur Bestellung von Pizza und Pasta. Dieses Projekt wurd
 ## 📥 Installation
 1. Klone das Repository:
    ```bash
-   git clone [https://github.com/DEIN_USERNAME/bestell-app.git](https://github.com/saeed ghorbani/bestell-app.git)
+   git clone https://github.com/ghorbani-saeed/bestell-app.git
