@@ -1,4 +1,4 @@
-# Bestell-App: Paradis Noodles 🍜
+# Bestell-App: 
 
 Eine interaktive Web-App zur Bestellung von Pizza und Pasta. Dieses Projekt wurde im Rahmen meines Mentorings erstellt.
 
