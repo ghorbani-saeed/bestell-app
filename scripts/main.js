@@ -1,139 +1,246 @@
 const shippingFee = 4.99;
-let baskets = []; 
+let basket = [];
 
-function linksNameCategorygenerate() { 
-  let menuCategoryEl = document.getElementById("menu-category"); 
-  menuCategoryEl.innerHTML = "";//dakhele div dar index.html ro khali kon
-  for (let i = 0; i < categories.length; i++) { //ba halghe be tamame anasore dakhle datenbank dastersi peyda kon
-    menuCategoryEl.innerHTML += ` 
-      <a href="#categoryIdNr-${i}"> 
-        ${categories[i].name} 
-      </a>
-    `;
-  }
+
+function linksNameCategory() {
+    let menuCategoryEl = document.getElementById("menu-category");
+    menuCategoryEl.innerHTML = ""; 
+    for (let i = 0; i < categories.length; i++) {
+        linkNameCategoryTemplate(menuCategoryEl, i);
+    }
 }
 
 
-function categoryNameFotoGenerate() { 
-  const categoryElement = document.getElementById("category");
-  categoryElement.innerHTML = "";
-  for (let i = 0; i < categories.length; i++) {
-    categoryElement.innerHTML += `
-      <div class="food-category category-full" id="categoryIdNr-${i}"> 
+function linkNameCategoryTemplate(menuCategoryEl, i){
+    menuCategoryEl.innerHTML += ` 
+      <a href="#categoryIdNr-${i}"> 
+        ${categories[i].name} 
+      </a> 
+    `;
+}      
+
+
+function categoryNameFoto() {
+    const categoryElement = document.getElementById("category");
+    categoryElement.innerHTML = "";
+    for (let i = 0; i < categories.length; i++) {
+        categoryElement.innerHTML += categoryNameFotoTemplate(i)
+        generateFoodsCards(i);
+    }
+}
+
+
+function categoryNameFotoTemplate(i){
+    return `
+      <div class="food-category" id="categoryIdNr-${i}"> 
         <h2>${categories[i].name}</h2>
         <img src="${categories[i].image}" alt="${categories[i].name}">
       </div>
       <div class="foods" id="foodsNr${i}"></div>
     `;
-
-    generateFoodsCards(i);
-  }
 }
 
 
 function generateFoodsCards(index) { 
-  let foodElement = document.getElementById("foodsNr" + index); 
-  foodElement.innerHTML = "";
-  for (let foodsIndex = 0; foodsIndex < categories[index].foods.length; foodsIndex++) { 
-    let food = categories[index].foods[foodsIndex];
-    foodElement.innerHTML += `
-      <div class="food pizza" id="food-${index}-${foodsIndex}"> 
-        <h2>${food.name}</h2><p>${food.description}</p>
-        <span class="euro">${food.price.toFixed(2)}€</span>
-        <div class="hero-plus-div" onclick="addToBasket(${index}, ${foodsIndex})"><button class="hero-plus-icon">+</button></div></div>
-    `;
-  }
+    let foodElement = document.getElementById("foodsNr" + index);
+    foodElement.innerHTML = "";
+    let foodList = categories[index].foods;
+    for (let foodsIndex = 0;foodsIndex < foodList.length; foodsIndex++) {
+        let food = foodList [foodsIndex];
+        foodElement.innerHTML += foodcardsTemplate(food, foodsIndex, index);
+    }
 }
 
 
-function addToBasket(categoryIndex, foodIndex) {
-  let food = categories[categoryIndex].foods[foodIndex];
-   let basketIndex = -1; 
-  for (let i = 0; i < baskets.length; i++) {
-    if (baskets[i].name === food.name) {
-      basketIndex = i; break; 
+function foodcardsTemplate(food, foodsIndex, index){
+    return `
+      <div class="food pizza" id="food-${index}-${foodsIndex}"> 
+        <h2>${food.name}</h2><p>${food.description}</p>
+        <span class="euro">${food.price.toFixed(2)}€</span>
+        <div class="hero-plus-div" onclick="addToBasket(${index}, ${foodsIndex})">
+        <button class="hero-plus-icon">+</button></div></div>
+    `;
+}
+
+
+function addToBasket(categoryIndex, foodIndex) { 
+    let food = categories[categoryIndex].foods[foodIndex];
+    let basketIndex = -1;
+    for (let i = 0; i < basket.length; i++) {
+        if (basket[i].name === food.name) {
+            basketIndex = i;
+            break;
+        }
     }
-  }
-  if (basketIndex !== -1) {baskets[basketIndex].count++;} else {
-      baskets.push({
-      name: food.name,
-      price: food.price,
-      count: 1
-    });
-  }
-  console.log(baskets); 
-  generateBasketCard();
+    if (basketIndex !== -1) {
+        basket[basketIndex].count++;
+    } else {
+        basket.push({
+            name: food.name,
+            price: food.price,
+            count: 1,
+        });
+    }
+    generateBasketCard();
+    document.getElementById("side-menu").classList.add("show-mobile"); 
 }
 
 
 function generateBasketCard() {
-  const basketFoodsEl = document.getElementById("basket-foodstuffs");      
-  const basketInfoEl  = document.getElementById("basket-info");     
-  const emptyBasketEl = document.getElementById("empty-basket");   
-  basketFoodsEl.innerHTML = "";  
-  if (baskets.length === 0) { basketInfoEl.style.display = "none"; emptyBasketEl.style.display = "flex"; return;}
-  basketInfoEl.style.display = "block"; emptyBasketEl.style.display = "none"; 
-  for (let i = 0; i < baskets.length; i++) { let food = baskets[i]; let totalPrice = (food.price * food.count).toFixed(2); 
-   basketFoodsEl.innerHTML += `
-  <div class="basket-food"><h3>${food.name}</h3>
-    <div class="basket-food-info"><div class="count"><button type="button" class="btn-minus" data-index="${i}">-</button><span>${food.count}x</span><button type="button" class="btn-plus" data-index="${i}">+</button></div>
-      <div class="price euro trash"><span>${totalPrice}€</span><button type="button" class="btn-delete" data-index="${i}">🗑️</button></div></div></div>
+    const emptyBasketEl = document.getElementById("empty-basket");
+    const basketInfoEl = document.getElementById("basket-info");
+    const basketFoodsEl = document.getElementById("basket-foodstuffs");
+    basketFoodsEl.innerHTML = "";
+    if (basket.length === 0) {
+        basketInfoEl.style.display = "none";
+        emptyBasketEl.style.display = "flex";
+        return;
+    }
+    basketInfoEl.style.display = "block";
+    emptyBasketEl.style.display = "none";
+    for (let i = 0; i < basket.length; i++) {
+        let food = basket[i];
+        let totalPrice = (food.price * food.count).toFixed(2).replace('.', ',');
+        basketFoodsEl.innerHTML += basketCardTemplate(food, i, totalPrice);
+    
+    }
+    generatePriceTable();
+}
+
+
+function basketCardTemplate(food, i, totalPrice){
+    return `
+      <div class="basket-food">
+          <h3>${food.name}</h3>
+          <div class="basket-food-info">
+              <div class="count">
+                  <button type="button" onclick="decreaseBasket(${i})">
+                      <i class="bi bi-dash-lg"></i>
+                  </button>
+
+                  <span class ="count-number">${food.count}x</span>
+
+                  <button type="button" onclick="increaseBasket(${i})">
+                      <i class="bi bi-plus-lg"></i>
+                  </button>
+              </div>
+
+              <div class="price-container">
+                <span class= "price">${totalPrice} €</span>
+              </div>
+
+              <button type="button" class="btn-trash-can" onclick="deleteFromBasket(${i})">
+                <i class="bi bi-trash3-fill"></i>
+              </button>
+          </div>
+      </div>
 `;
-  }
-  generatePriceTable();
 }
 
 
-function increaseBasket(index) { 
-  baskets[index].count++; 
-  generateBasketCard();  
+function increaseBasket(index) {
+    basket[index].count++;
+    generateBasketCard();
 }
 
 
-function decreaseBasket(i) { 
-  console.log("VORHER:", baskets[i].count);
-  if (baskets[i].count > 1) { baskets[i].count--;} 
-  else { baskets.splice(i, 1);}
-  generateBasketCard();   
+function decreaseBasket(i) {
+    if (basket[i].count > 1) {
+        basket[i].count--;
+    } else {
+        basket.splice(i, 1);
+    }
+    generateBasketCard();
 }
 
 
-function deleteFromBasket(index) { 
-  baskets.splice(index, 1);        
-  generateBasketCard();       
+function deleteFromBasket(index) {
+    basket.splice(index, 1);
+    generateBasketCard();
 }
 
 
 function generatePriceTable() {
-  let subtotal = calculatePrice(baskets);
-  let total = (subtotal + shippingFee).toFixed(2);
-  document.getElementById("basket-total").innerHTML = `
-    <tr><td>Zwischensumme</td><td class="euro">${subtotal}€</td></tr>
-    <tr><td>Lieferkosten</td><td class="euro">${shippingFee}€</td></tr>
-    <tr><td>Gesamt</td><td class="euro">${total}€</td></tr>
+    let subtotal = calculatePrice(basket);
+    let total = (subtotal + shippingFee).toFixed(2);
+    document.getElementById("basket_table").innerHTML = PriceTableTemplate(total, subtotal); //mega wichtig=> hier muss ich ken "+=" nutzen weil ich nur einmal tabelle in warenkorb zeigen will deswegen nur "=" nutzen
+}
+ 
+
+function PriceTableTemplate(total, subtotal){
+    return `
+    <tr>
+      <td class="label">Zwischensumme</td>
+      <td class="value">${subtotal.toFixed(2).replace('.', ',')}€</td>
+    </tr>
+    <tr>
+      <td class="label">Lieferkosten</td>
+      <td class="value">${shippingFee.toFixed(2).replace('.', ',')}€</td>
+    </tr>
+    <tr class="total-row">
+      <td class="label">Gesamt</td>
+      <td class="value" id="basket-total">${total.replace('.', ',')}€</td>
+    </tr>
   `;
+
 }
 
 
-function calculatePrice(foods) { 
-  let subtotal = 0;
-  for (let i = 0; i < foods.length; i++) {   
-    subtotal = subtotal + foods[i].price * foods[i].count;
-  }
-  return parseFloat(subtotal.toFixed(2));
+function calculatePrice(foods) {
+    let subtotal = 0;
+    for (let i = 0; i < foods.length; i++) {
+        subtotal = subtotal + foods[i].price * foods[i].count;
+    }
+    return parseFloat(subtotal.toFixed(2));
+}
+
+
+function updatePopupData() {
+    let listeText = "";
+    for (let i = 0; i < basket.length; i++) {
+        listeText += basket[i].count + "x " + basket[i].name + "<br>";
+    }
+    document.getElementById("popup-liste").innerHTML = listeText;
+    document.getElementById("popup-preis").innerText = document.getElementById("basket-total").innerText;
+}
+
+
+function BtnPay() {
+    updatePopupData(); // Hier rufen wir die Daten-Vorbereitung auf, wird niemals updatePopupData() selbstständig ausführen ausser wenn bezahle taste geclckt wird. weil in  onclick'btnPay diese function updatePopupData(); aufgerfuen und nie anderswo
+    document.getElementById("pay-overlay").style.display = "flex";
+}
+
+
+function emptyShoppingCart(){
+  basket = [];
+    generateBasketCard();
+    document.getElementById("pay-overlay").style.display = "none";
+
+}
+
+
+function confirmOrder() {
+    alert("Vielen Dank! Ihre Bestellung wird zubereitet.");
+    basket = [];
+    generateBasketCard();
+    document.getElementById("pay-overlay").style.display = "none";
+}
+
+
+function cancelOrder() {
+    document.getElementById("pay-overlay").style.display = "none";
+}
+
+
+function toggleMobileMenu() {
+    let sideMenu = document.getElementById("side-menu");
+    sideMenu.classList.toggle("show-mobile");
 }
 
 
 function init() {
-  linksNameCategorygenerate();    
-  categoryNameFotoGenerate();    
-  generateBasketCard();          
-  const basketFoodsEl = document.getElementById("basket-foodstuffs"); 
-  basketFoodsEl.addEventListener("click", function(e) {       
-    const btn = e.target.closest("button");                 
-    if (!btn) return; const index = Number(btn.dataset.index);
-    if (btn.classList.contains("btn-minus")) {decreaseBasket(index);} 
-      else if (btn.classList.contains("btn-plus")) {increaseBasket(index);}
-      else if (btn.classList.contains("btn-delete")) {deleteFromBasket(index);}
-  });
+    linksNameCategory();
+    categoryNameFoto();
+    generateBasketCard();
 }
+

@@ -61,18 +61,15 @@ icon-plus {
      background-color: rgb(199, 131, 4) !important;
 }
 .hero-plus-icon {
-    font-size: 50px;         /* gewünschte plus Größe */
-    color: white;          /* Farbe von plus*/
-    font-weight: bold;       /* optional */
-        
-    cursor: pointer;         /* klickbar */
+    font-size: 50px;         
+    color: white;          
+    font-weight: bold;      
+    cursor: pointer;         
     border: none;
     background-color: rgb(199, 131, 4) !important;
     &:hover{
       color: #049c18;
     }
-
- /*oval-form kommt von browser weil ich selber höhe und bereite nicht eingestellt*/
 
 }
 

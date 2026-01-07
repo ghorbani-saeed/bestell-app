@@ -1,91 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bestell App</title>
-    <link rel="icon"       href="./asset/img/favicon.png" type="image/png" />
-    <link rel="stylesheet" href="./style/icons.css" />
-    <link rel="stylesheet" href="./style/fonts.css" />
-    <link rel="stylesheet" href="./style/main.css" />
-    <link rel="stylesheet" href="./style/standard.css" />
-    <script src="./scripts/foodsListDb.js"          defer></script>
-    
-    <script src="./scripts/main.js" defer></script>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bestell App</title>
 
-  </head>
+        <link rel="icon" href="./asset/img/favicon.png" type="image/png" />
+        <link rel="stylesheet" href="./style/icons.css" />
+        <link rel="stylesheet" href="./style/fonts.css" />
+        <link rel="stylesheet" href="./style/main.css" />
+        <link rel="stylesheet" href="./style/standard.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
-  <body onload="init()">
+        <script src="./scripts/foodsListDb.js" defer></script>
+        <script src="./scripts/main.js" defer></script>
+    </head>
 
-    <header class="logo">
+    <body onload="init()">
+        <div id="basket-overlay" class="basket-overlay" onclick="toggleMobileMenu()"></div>
+        <header>
+                <div class="logo">
+                    <img class="bestell-app-logo"src="./asset/img/logo1.png"alt="Logo"/>
+                    <span class="hamberger-menu">☰</span>
+                </div>
+        </header>
 
-      <div class="logo">
-        <img class="bestell-app-logo" src="./asset/img/logo1.png" alt="" />
-        <span class="hamberger-menu">☰</span>
-      </div>
+        <main>
+            <div class="content-limit">
+                <section class="restaurant-menu">
+                    <div class="menu-content">
+                        <div class="hero-and-circle">
+                            <img src="./asset/img/spicy-noodle.jpg" class="hero-img" alt="Hero Image"/>
+                            <img src="./asset/img/noodle-box.png" class="circle-img" alt="Restaurant Icon" />
+                        </div>
 
-    </header>
+                        <div class="restaurant-info">
+                            <h1 class="paradise">Paradis Noodles</h1>
+                            <h2 class="bewertung">Bewertung (4.7 von 5 Sternen)</h2>
+                        </div>
 
-    <main>
+                        <div class="category-container">
+                            <span class="arrow-icon"><i class="bi bi-caret-right-fill"></i></span>
+                            <div class="category-links" id="menu-category">
+                            </div>
+                        </div>
 
-      <section class="restaurant-menu">
+                        <div class="food-list-container">
+                            <div class="food-list" id="category">
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <div class="menu-content">
-          <div class="poster">
-            <img src="./asset/img/spicy-noodle.jpg" class="big-image"    alt="" />
-            <img src="./asset/img/noodle-box.png"   class="circle-image" alt="" />
-          </div>
-          
-          <div class="restaurant-info">
-            <h1>Paradis Noodles</h1>
-            <h2>Bewertung (4.7 von 5 Sternen)</h2>
-            <div class="restaurant-details">
-              <div class="star-info"></div>
-              <div class="price-info"><span class="euro" id="min-order-price"></span></div>
-              <div class="delivery-info"><span class="euro" id="delivery-cost"></span></div>
-            </div>
-          </div>
+                <aside id="side-menu" class="side-menu">
+                    <i class="bi bi-x-square-fill close-menu" onclick="toggleMobileMenu()"></i>
+                    <div class="basket-content">
+                        <h2 class="empty-basket basket-title">Warenkorb</h2>
+                        <p class="empty-basket empty-basket-text" id="empty-basket">Füge leckere Gerichte aus der Karte hinzu.</p>
+                        <div class="basket-info" id="basket-info" style="display: none">
+                            <div class="basket-foodstuffs" id="basket-foodstuffs">
+                            </div> 
 
-          <div class="category-container">
-            <span class="arrow-icon">➤</span>
-            <div class="category" id="menu-category"></div>
-          </div>
-          <div class="food-list-container">
-            <div class="food-list" id="category"></div>
-          </div>
-        </div> 
+                            <div class="basket-sum">
+                                <table class="basket-table" id="basket_table"></table> 
+                            </div>
+                            <div class="btns-basket-container"> 
+                                <button onclick="BtnPay()" class="btn-pay" id="btn_pay" >Bezahlen</button>
 
-      </section>
+                                <button onclick="emptyShoppingCart()" class="btn-del" id="btn_del"> Löschen</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+             </div>
+           </div> 
+        </main>
 
-
-      
-      <aside id="side-menu">
-        <div class="basket-content">
-          <h2>Warenkorb</h2>
-          <div class="icon icon-times" onclick="hideBasketInfo()"></div>
-          <div class="empty-basket" id="empty-basket">
-            <h3>warenKorb leer</h3>
-          </div>
-          <div class="basket-info" id="basket-info">
-            <div class="basket-foodstuffs" id="basket-foodstuffs"></div>
-            <div class="basket-sum">
-              <table id="basket-total"></table>
-            </div>
-          </div>
+        <div
+            class="btn-basket-container"
+            id="btn_basket_container"
+            style="display: none">
+            <button onclick="toggleMobileMenu()" class="btn-footer">
+                Warenkorb ansehen
+            </button>
         </div>
-      </aside>
 
-    </main>
-    
+        <footer id="footer">
+            <p>© 2025 Saeed Ghorbani</p>
+            <div>
+                <a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">Kontakt</a>
+            </div>
+        </footer>
 
- <footer id="footer">
-  <p>© 2025 Saeed Ghorbani</p>
-  <div>
-    <a href="#">Impressum</a> |
-    <a href="#">Datenschutz</a> |
-    <a href="#">Kontakt</a>
-  </div>
-</footer>
+        <div id="pay-overlay" class="pay-overlay">
+            <div class="pay-window">
+                <h2>Deine Bestellung</h2>
 
-  </body>
+                <div id="popup-liste"></div>
+                <div id="popup-preis"></div>
+
+                <button onclick="confirmOrder()" class="btn-pay">
+                    Kostenpflichtig bestellen
+                </button>
+
+                <button onclick="cancelOrder()" class="btn-cancel">
+                    Abbrechen
+                </button>
+            </div>
+        </div>
+    </body>
 </html>
+
