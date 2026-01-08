@@ -510,6 +510,7 @@ footer {
     }
 }
 
+
 /* #region RESPONSIVE STYLES */
 @media (max-width: 1100px) {
     .hidden_1099px,
@@ -914,32 +915,7 @@ footer {
         }
     }
 }
-/* #endregion */
 
-/* #region SCROLLEN CSS: */
-@media (min-width: 1100px) {
-    #basket-foodstuffs {
-        max-height: 320px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-right: 5px;
-    }
-}
-
-@media (max-width: 1099px) {
-    #basket-foodstuffs {
-        max-height: 220px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-right: 5px;
-    }
-
-    .side-menu {
-        max-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-}
 @media (max-width: 395px) {
     header {
         padding: 12px 24px;
@@ -999,5 +975,32 @@ footer {
         margin-bottom: 25px !important;
     }
 }
+/* #endregion */
+
+/* #region SCROLLEN CSS: */
+@media (min-width: 1100px) {
+    #basket-foodstuffs {
+        max-height: 320px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 16px;
+    }
+}
+
+@media (max-width: 1099px) {
+    #basket-foodstuffs {
+        max-height: 220px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 16px;
+    }
+
+    .side-menu {
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 
 /* #endregion */
