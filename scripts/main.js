@@ -58,7 +58,8 @@ function foodcardsTemplate(food, foodsIndex, index){
         <h2>${food.name}</h2><p>${food.description}</p>
         <span class="euro">${food.price.toFixed(2)}€</span>
         <div class="hero-plus-div" onclick="addToBasket(${index}, ${foodsIndex})">
-        <button class="hero-plus-icon">+</button></div></div>
+        <button class="hero-plus-icon">+</button></div>
+      </div>
     `;
 }
 
@@ -220,12 +221,16 @@ function emptyShoppingCart(){
 
 
 function confirmOrder() {
-    alert("Vielen Dank! Ihre Bestellung wird zubereitet.");
     basket = [];
     generateBasketCard();
     document.getElementById("pay-overlay").style.display = "none";
+    document.getElementById("success-overlay").style.display = "flex";
 }
 
+
+function closepreise() {
+    document.getElementById("success-overlay").style.display = "none";
+}
 
 function cancelOrder() {
     document.getElementById("pay-overlay").style.display = "none";

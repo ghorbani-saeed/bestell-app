@@ -510,7 +510,53 @@ footer {
     }
 }
 
-
+.black-stage {
+    display: none; /* Standardmäßig aus */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Schwarz-transparent */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    .btn-pay {
+        padding: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: rgb(0,128,0);
+        color: white;
+        margin-bottom: 10px;
+        &:hover {
+            background-color: #025827;
+        }
+    }
+    .btn-cancel {
+        padding: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #7d0202;
+        color: white;
+        &:hover {
+            background-color: #5b0b03;
+        }
+    }
+}
+.content-window {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    .ok{
+        padding: 8px 12px;
+        background: rgb(0,128,0);
+        color: white;
+        margin-top: 12px;
+    }
+}
 /* #region RESPONSIVE STYLES */
 @media (max-width: 1100px) {
     .hidden_1099px,
@@ -885,34 +931,22 @@ footer {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
     .food {
         min-height: 145px;
     }
     .hero-plus-div {
-        width: 40px; 
+        width: 40px;
         height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     .hero-plus-icon {
-        font-size: 24px !important; 
+        font-size: 24px !important;
         padding: 0 !important;
         line-height: 1;
         border: none;
-    }
- 
-}
-
-@media (max-width: 340px) {
-            footer {
-        p {
-            font-size: 18px;
-        }
-        div{
-            font-size: 16px;
-        }
     }
 }
 
@@ -975,6 +1009,17 @@ footer {
         margin-bottom: 25px !important;
     }
 }
+
+@media (max-width: 340px) {
+    footer {
+        p {
+            font-size: 18px;
+        }
+        div {
+            font-size: 16px;
+        }
+    }
+}
 /* #endregion */
 
 /* #region SCROLLEN CSS: */
@@ -1001,6 +1046,5 @@ footer {
         flex-direction: column;
     }
 }
-
 
 /* #endregion */

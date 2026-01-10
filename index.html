@@ -92,22 +92,30 @@
             </div>
         </footer>
 
-        <div id="pay-overlay" class="pay-overlay">
-            <div class="pay-window">
-                <h2>Deine Bestellung</h2>
+        <div id="pay-overlay" class="black-stage">
+           <div class="pay-window content-window">
+              <h2>Deine Bestellung</h2>
+              <div id="popup-liste"></div>
+              <div id="popup-preis" style="font-weight: bold; margin: 15px 0;"></div>
 
-                <div id="popup-liste"></div>
-                <div id="popup-preis"></div>
-
-                <button onclick="confirmOrder()" class="btn-pay">
-                    Kostenpflichtig bestellen
-                </button>
-
-                <button onclick="cancelOrder()" class="btn-cancel">
-                    Abbrechen
-                </button>
+              <button onclick="confirmOrder()" class="btn-pay btn-haupt">
+                Kostenpflichtig bestellen
+              </button>
+              <button onclick="cancelOrder()" class="btn-cancel">
+                Abbrechen
+              </button>
             </div>
         </div>
+
+        <div id="success-overlay" class="black-stage">
+            <div class="content-window">
+                <i class="bi bi-check-circle-fill" style="color: green; font-size: 3rem;"></i>
+                <h2>Vielen Dank!</h2>
+                <p>Ihre Bestellung wird zubereitet.</p>
+                <button  class="btn-haupt ok" onclick="closepreise()">OK</button>
+            </div>
+        </div>
+         
     </body>
 </html>
 
