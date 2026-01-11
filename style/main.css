@@ -545,11 +545,14 @@ footer {
 }
 .content-window {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
+    padding: 8px;
+    border-radius: 10px;
     text-align: center;
-    max-width: 400px;
+    max-width: 250px;
     width: 90%;
+    h2{
+        margin: 8px;
+    }
     .ok{
         padding: 8px 12px;
         background: rgb(0,128,0);

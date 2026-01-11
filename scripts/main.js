@@ -230,6 +230,7 @@ function confirmOrder() {
 
 function closepreise() {
     document.getElementById("success-overlay").style.display = "none";
+
 }
 
 function cancelOrder() {
