@@ -490,7 +490,7 @@ footer {
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
-
+            
             &.btn-pay {
                 background-color: #026423;
                 color: rgb(255, 255, 255);
@@ -554,10 +554,15 @@ footer {
         margin: 8px;
     }
     .ok{
+        cursor: pointer;
         padding: 8px 12px;
         background: rgb(0,128,0);
         color: white;
         margin-top: 12px;
+    }
+    .popup-preis{
+        font-weight: bold; 
+        margin: 15px 0;
     }
 }
 /* #region RESPONSIVE STYLES */

@@ -83,7 +83,6 @@ function addToBasket(categoryIndex, foodIndex) {
         });
     }
     generateBasketCard();
-    document.getElementById("side-menu").classList.add("show-mobile"); 
 }
 
 
@@ -103,7 +102,6 @@ function generateBasketCard() {
         let food = basket[i];
         let totalPrice = (food.price * food.count).toFixed(2).replace('.', ',');
         basketFoodsEl.innerHTML += basketCardTemplate(food, i, totalPrice);
-    
     }
     generatePriceTable();
 }
@@ -170,20 +168,19 @@ function generatePriceTable() {
 
 function PriceTableTemplate(total, subtotal){
     return `
-    <tr>
-      <td class="label">Zwischensumme</td>
-      <td class="value">${subtotal.toFixed(2).replace('.', ',')}€</td>
-    </tr>
-    <tr>
-      <td class="label">Lieferkosten</td>
-      <td class="value">${shippingFee.toFixed(2).replace('.', ',')}€</td>
-    </tr>
-    <tr class="total-row">
-      <td class="label">Gesamt</td>
-      <td class="value" id="basket-total">${total.replace('.', ',')}€</td>
-    </tr>
-  `;
-
+     <tr>
+        <td class="label">Zwischensumme</td>
+        <td class="value">${subtotal.toFixed(2).replace('.', ',')}€</td>
+     </tr>
+     <tr>
+        <td class="label">Lieferkosten</td>
+        <td class="value">${shippingFee.toFixed(2).replace('.', ',')}€</td>
+     </tr>
+     <tr class="total-row">
+        <td class="label">Gesamt</td>
+        <td class="value" id="basket-total">${total.replace('.', ',')}€</td>
+     </tr>
+   `;
 }
 
 
@@ -213,10 +210,9 @@ function BtnPay() {
 
 
 function emptyShoppingCart(){
-  basket = [];
+    basket = [];
     generateBasketCard();
     document.getElementById("pay-overlay").style.display = "none";
-
 }
 
 
@@ -230,8 +226,8 @@ function confirmOrder() {
 
 function closepreise() {
     document.getElementById("success-overlay").style.display = "none";
-
 }
+
 
 function cancelOrder() {
     document.getElementById("pay-overlay").style.display = "none";
