@@ -94,6 +94,7 @@ function generateBasketCard() {
     if (basket.length === 0) {
         basketInfoEl.style.display = "none";
         emptyBasketEl.style.display = "flex";
+        document.getElementById("side-menu").classList.remove("show-mobile");
         return;
     }
     basketInfoEl.style.display = "block";
